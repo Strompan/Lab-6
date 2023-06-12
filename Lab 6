@@ -1,0 +1,64 @@
+import math
+
+class Shape:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+
+    def rotate(self, angle):
+        radians = math.radians(angle)
+        cos = math.cos(radians)
+        sin = math.sin(radians)
+        x = self.x * cos - self.y * sin
+        y = self.x * sin + self.y * cos
+        self.x, self.y = x, y
+
+class Circle(Shape):
+    def __init__(self, x=0, y=0, radius=1):
+        super().__init__(x, y)
+        self.radius = radius
+
+    def scale(self, factor):
+        self.radius *= factor
+
+class Square(Shape):
+    def __init__(self, x=0, y=0, size=1):
+        super().__init__(x, y)
+        self.size = size
+
+    def scale(self, factor):
+        self.size *= factor
+
+class Rectangle(Shape):
+    def __init__(self, x=0, y=0, width=1, height=1):
+        super().__init__(x, y)
+        self.width = width
+        self.height = height
+
+    def scale(self, factor):
+        self.width *= factor
+        self.height *= factor
+
+
+circle = Circle(0, 0, 2)
+square = Square(3, 4, 5)
+rectangle = Rectangle(-2, 1, 6, 3)
+
+print("Передвинули на (1, -2), масштабировали в 2 раза и повернули на 30 градусов:")
+circle.move(1, -2)
+circle.scale(2)
+circle.rotate(30)
+square.move(1, -2)
+square.scale(2)
+square.rotate(30)
+rectangle.move(1, -2)
+rectangle.scale(2)
+rectangle.rotate(30)
+
+print(f"Координаты круга: ({circle.x}, {circle.y}), радиус: {circle.radius}")
+print(f"Координаты квадрата: ({square.x}, {square.y}), размер: {square.size}")
+print(f"Координаты прямоугольника: ({rectangle.x}, {rectangle.y}), ширина: {rectangle.width}, высота: {rectangle.height}")
